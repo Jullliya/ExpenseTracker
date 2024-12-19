@@ -8,15 +8,27 @@ import dev.jullls.expensetracker.R
 import dev.jullls.expensetracker.databinding.ItemTransactionBinding
 import dev.jullls.expensetracker.presentation.ui.Transaction
 
-class TransactionsFragmentAdapter(private val transactionList: List<Transaction>):
+class TransactionsFragmentAdapter(private var transactionList: List<Transaction>):
     RecyclerView.Adapter<TransactionsFragmentAdapter.TransactionViewHolder>() {
 
-        class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private var originalList = transactionList.toMutableList()
+
+    fun filterTransactions(category: String) {
+        transactionList = if (category.isEmpty()) {
+            originalList
+        } else {
+            originalList.filter { it.category == category }
+        }
+        notifyDataSetChanged()
+    }
+
+    class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             private val binding = ItemTransactionBinding.bind(view)
 
             fun bind(transaction: Transaction) {
                 with(binding) {
                     tvTransactionsName.text = transaction.name
+                    tvTransactionCategory.text = transaction.category
                     tvTransactionsAmount.text = transaction.amount.toString()
                 }
             }

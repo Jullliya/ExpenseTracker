@@ -1,12 +1,16 @@
 package dev.jullls.expensetracker.presentation.ui.transactions_fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.ShapeAppearanceModel
 import dev.jullls.expensetracker.R
 import dev.jullls.expensetracker.databinding.FragmentTransactionsBinding
 import dev.jullls.expensetracker.presentation.ui.Transaction
@@ -90,6 +94,8 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         )
     )
 
+    val categoriesList = listOf("Cafe and restaurants", "Home", "Health", "Food", "Beauty")
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -112,6 +118,7 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
     private fun setupUI() {
         setupRecyclerTransactions()
+        setupChipGroupCategories()
     }
 
     private fun setupRecyclerTransactions() {
@@ -120,6 +127,50 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
             rvTransactions.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             rvTransactions.adapter = TransactionsFragmentAdapter(transactionList)
+        }
+    }
+
+    private fun setupChipGroupCategories() {
+        with(binding) {
+            for (text in categoriesList) {
+                val chip = Chip(requireContext()).apply {
+                    setText(text)
+                    chipBackgroundColor = ContextCompat.getColorStateList(
+                        context,
+                        androidx.cardview.R.color.cardview_light_background
+                    )
+                    chipStrokeColor = ContextCompat.getColorStateList(
+                        context,
+                        androidx.cardview.R.color.cardview_light_background
+                    )
+                    shapeAppearanceModel = ShapeAppearanceModel.builder()
+                        .setAllCorners(
+                            CornerFamily.ROUNDED,
+                            resources.getDimension(R.dimen.chip_corner_radius)
+                        )
+                        .build()
+                    elevation = 2f
+                    setTextColor(resources.getColorStateList(R.color.black, null))
+                    isCheckable = true
+                    isCheckedIconVisible = false
+                    isCloseIconVisible = false
+                    textSize = 14f
+                    isCheckable = true
+                    setOnCheckedChangeListener { _, isChecked ->
+                        if (isChecked) {
+                            (rvTransactions.adapter as TransactionsFragmentAdapter).filterTransactions(
+                                text
+                            )
+                        } else {
+                            (rvTransactions.adapter as TransactionsFragmentAdapter).filterTransactions(
+                                ""
+                            )
+                        }
+                    }
+                }
+
+                containerChipCategories.addView(chip)
+            }
         }
     }
 

@@ -29,6 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_transactions">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/container_chip_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -36,47 +37,7 @@
             app:chipSpacingHorizontal="8dp"
             app:chipSpacingVertical="4dp"
             app:selectionRequired="false"
-            app:singleLine="true">
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/cardview_light_background"
-                android:elegantTextHeight="false"
-                android:elevation="2dp"
-                android:freezesText="false"
-                android:text="Cafes and restaurants"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:chipCornerRadius="100dp"
-                app:chipStrokeColor="@color/cardview_light_background" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/cardview_light_background"
-                android:elegantTextHeight="false"
-                android:elevation="2dp"
-                android:freezesText="false"
-                android:text="Cafes and restaurants"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:chipCornerRadius="100dp"
-                app:chipStrokeColor="@color/cardview_light_background" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/cardview_light_background"
-                android:elegantTextHeight="false"
-                android:elevation="2dp"
-                android:freezesText="false"
-                android:text="Cafes and restaurants"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:chipCornerRadius="100dp"
-                app:chipStrokeColor="@color/cardview_light_background" />
-        </com.google.android.material.chip.ChipGroup>
+            app:singleLine="true"/>
     </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
