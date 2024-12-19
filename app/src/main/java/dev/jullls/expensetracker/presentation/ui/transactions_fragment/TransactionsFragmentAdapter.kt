@@ -13,6 +13,12 @@ class TransactionsFragmentAdapter(private var transactionList: List<Transaction>
 
     private var originalList = transactionList.toMutableList()
 
+    fun updateTransactions(newTransactionList: List<Transaction>) {
+        transactionList = newTransactionList
+        originalList = newTransactionList.toMutableList()
+        notifyItemInserted(transactionList.size - 1)
+    }
+
     fun filterTransactions(category: String) {
         transactionList = if (category.isEmpty()) {
             originalList
