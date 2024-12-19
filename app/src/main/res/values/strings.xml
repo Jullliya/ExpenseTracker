@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Expense Tracker</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transactions_title">Transactions</string>
+    <string name="name_transactions">Name transactions</string>
+    <string name="category">Category</string>
+    <string name="_200p">200p</string>
+    <string name="transactions">Transactions</string>
+    <string name="statistic">Statistic</string>
+</resources>
